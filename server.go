@@ -130,7 +130,6 @@ func rootHandler(static string) func(w http.ResponseWriter, req *http.Request) {
 			f.Close()
 			return
 		}
-		fmt.Println(req.URL)
 		if !validExt.MatchString(req.URL.Path) {
 			http.Error(w, "not found", 404)
 			return
