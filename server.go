@@ -103,7 +103,6 @@ func tHandler(w http.ResponseWriter, r *http.Request) {
 		}
 		mg.HttpHandler(pre, logger).ServeHTTP(w, r)
 	default:
-		logger.Println("default")
 		w.Header().Set("Content-Type", "text/go; charset=utf-8")
 		if dotGo {
 			fullFn := strings.ToLower(pi.Name + "_" + strings.Join(pi.Types, "_") + ".go")

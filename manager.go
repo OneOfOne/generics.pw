@@ -3,7 +3,6 @@ package main
 import (
 	"io"
 	"path/filepath"
-	"strings"
 	"sync"
 	"time"
 
@@ -80,8 +79,7 @@ func (tm *TemplateManager) GitHandler(path string, pi *PkgInfo) (mg *memgit.Memo
 func (tm *TemplateManager) Output(w io.Writer, pi *PkgInfo) error {
 	tm.l.Lock()
 	defer tm.l.Unlock()
-	tname := strings.ToLower(pi.Name)
-	rt, err := tm.load(tname)
+	rt, err := tm.load(pi.tmpl)
 	if err != nil {
 		return err
 	}
