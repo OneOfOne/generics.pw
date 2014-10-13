@@ -24,6 +24,7 @@ var knownHosts = map[string]string{
 }
 
 type PkgInfo struct {
+	tmpl       string
 	Name       string
 	Pkg        string
 	Types      []string
@@ -55,6 +56,7 @@ func NewPkgInfo(path string, git bool) (pi *PkgInfo) {
 		return
 	}
 	pi = &PkgInfo{
+		tmpl: strings.ToLower(p[0][1]),
 		Name: capitalize(p[0][1]),
 		Pkg:  "main",
 	}

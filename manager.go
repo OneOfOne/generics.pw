@@ -56,14 +56,13 @@ func (tm *TemplateManager) GitHandler(path string, pi *PkgInfo) (mg *memgit.Memo
 	}
 	if mg = tm.git[path]; mg == nil {
 		buf := getBuffer()
-		tname := strings.ToLower(pi.Name)
-		rt, err := tm.load(tname)
+		rt, err := tm.load(pi.tmpl)
 		if err != nil {
 			return nil, err
 		}
 		mg = memgit.New()
 		rt.Output(buf, pi)
-		mg.AddFile(tname+".go", buf.Bytes())
+		mg.AddFile(pi.tmpl+".go", buf.Bytes())
 		_, c := mg.Commit(path, rt.lastMod)
 		logger.Println("[manager] created commit", c, "for", path)
 		tm.git[path] = mg
