@@ -120,7 +120,9 @@ func (rt *ReTemplate) Output(w io.Writer, pi *PkgInfo) error {
 		}
 		w.Write(rt.data[lidx:pidx[0]])
 		idx := placeholdersMap[rt.data[pidx[0]]]
-		io.WriteString(w, vals[idx])
+		if idx < len(vals) {
+			io.WriteString(w, vals[idx])
+		}
 		lidx = pidx[1]
 	}
 	w.Write(rt.data[lidx:])
